@@ -12,7 +12,11 @@ interface CommentCreateFormProps {
   startOpen?: boolean;
 }
 
-export default function CommentCreateForm({ postId, parentId, startOpen }: CommentCreateFormProps) {
+export default function CommentCreateForm({
+  postId,
+  parentId,
+  startOpen,
+}: Readonly<CommentCreateFormProps>) {
   const [open, setOpen] = useState(startOpen);
   const ref = useRef<HTMLFormElement | null>(null);
   const [formState, action] = useFormState(actions.createComment.bind(null, { postId, parentId }), {
