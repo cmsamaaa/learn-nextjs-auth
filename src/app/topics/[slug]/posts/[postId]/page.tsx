@@ -1,8 +1,9 @@
 import Link from 'next/link';
-// import PostShow from '@/components/posts/post-show';
-// import CommentList from '@/components/comments/comment-list';
-// import CommentCreateForm from '@/components/comments/comment-create-form';
+import PostShow from '@/components/posts/post-show';
+import CommentList from '@/components/comments/comment-list';
+import CommentCreateForm from '@/components/comments/comment-create-form';
 import paths from '@/paths';
+import { fetchCommentsByPostId } from '@/db/queries/comments';
 
 interface PostShowPageProps {
   params: {
@@ -12,7 +13,7 @@ interface PostShowPageProps {
 }
 
 export default async function PostShowPage({ params }: Readonly<PostShowPageProps>) {
-  const { slug } = params;
+  const { slug, postId } = params;
 
   return (
     <div className='space-y-3'>
@@ -22,9 +23,12 @@ export default async function PostShowPage({ params }: Readonly<PostShowPageProp
       >
         {'< '}Back to {slug}
       </Link>
-      {/* <PostShow /> */}
-      {/* <CommentCreateForm postId={postId} startOpen /> */}
-      {/* <CommentList comments={comments} /> */}
+      <PostShow postId={postId} />
+      <CommentCreateForm
+        postId={postId}
+        startOpen
+      />
+      <CommentList fetchData={() => fetchCommentsByPostId(postId)} />
     </div>
   );
 }
