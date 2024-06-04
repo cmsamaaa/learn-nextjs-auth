@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PostShow from '@/components/posts/post-show';
+import PostShowLoading from '@/components/posts/post-show-loading';
 import CommentList from '@/components/comments/comment-list';
 import CommentCreateForm from '@/components/comments/comment-create-form';
 import paths from '@/paths';
@@ -23,7 +24,7 @@ export default async function PostShowPage({ params }: Readonly<PostShowPageProp
       >
         {'< '}Back to {slug}
       </Link>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PostShowLoading />}>
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm
