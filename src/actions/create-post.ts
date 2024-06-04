@@ -38,7 +38,7 @@ export async function createPost(
   }
 
   const session = await auth();
-  if (!session || !session.user) {
+  if (!session?.user) {
     return {
       errors: {
         _form: ['You must be signed in to do this!'],
@@ -84,6 +84,7 @@ export async function createPost(
     }
   }
 
+  revalidatePath('/');
   revalidatePath(paths.topicShow(slug));
   redirect(paths.postShow(slug, post.id));
 }
