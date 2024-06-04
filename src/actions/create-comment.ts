@@ -34,7 +34,7 @@ export async function createComment(
   }
 
   const session = await auth();
-  if (!session || !session.user) {
+  if (!session?.user) {
     return {
       errors: {
         _form: ['You must sign in to do this.'],
